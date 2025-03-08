@@ -30,18 +30,25 @@ const ProductsContainer = () => {
     console.log(products)
   }, [products])
   return (
-    <Grid2 container className="container mt-3" spacing={2}>
-      {
-        loading ?
-          <LoadingModal open={loading} />
-          :
-          (
-            products.length ? products?.map((product, i) => (
-              <ProductItem key={i} product={product} />
-            )) : <Typography variant="h4" color="textSecondary">No se encontraron productos</Typography>
-          )
-      }
-    </Grid2>
+    loading ?
+      <LoadingModal open={loading} />
+      :
+      (
+        <>
+          {
+            products.length ? <>
+              <Typography className="container" variant="h4" marginTop={3} color="textSecondary">Se están mostrando {products.length} de {total} productos </Typography>
+              <Grid2 container className="container mt-3" spacing={2}>
+                {
+                  products?.map((product, i) => (
+                    <ProductItem key={i} product={product} />
+                  ))
+                }
+              </Grid2>
+            </> : <Typography variant="h4" marginTop={3} color="textSecondary">No se encontraron productos</Typography>
+          }
+        </>
+      )
   )
 }
 
